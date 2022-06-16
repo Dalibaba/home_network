@@ -1,12 +1,13 @@
 import Header from "./components/Header";
 import SensorCard from "./components/SensorCard";
-import "bootstrap/dist/css/bootstrap.min.css";
+import NavBar from "./components/NavBar";
 import { Container, Row, Col } from "react-bootstrap";
 
 function App() {
   return (
     <div className="container">
       <Header />
+      <NavBar />
       <Container>
         <Row>
           <Col>
