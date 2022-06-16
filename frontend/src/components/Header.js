@@ -6,6 +6,7 @@ const Header = () => {
       style={{
         display: "flex",
         alignItems: "center",
+        marginTop: "25px",
         justifyContent: "center",
       }}
     >

@@ -7,11 +7,11 @@ function App() {
   return (
     <div className="container">
       <Header />
-      <NavBar />
       <Container
         style={{
           backgroundColor: "WhiteSmoke",
           marginTop: "10px",
+          width: "80%",
         }}
       >
         <Row>

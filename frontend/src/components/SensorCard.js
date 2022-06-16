@@ -6,7 +6,7 @@ import { Container, Row, Col } from "react-bootstrap";
 const SensorCard = (props) => {
   return (
     <div>
-      <Card style={{ width: "25rem", margin: "10px" }}>
+      <Card style={{ margin: "10px" }}>
         <Container style={{ textAlign: "center" }}>
           <Row>
             <Card.Img
