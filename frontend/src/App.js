@@ -8,7 +8,12 @@ function App() {
     <div className="container">
       <Header />
       <NavBar />
-      <Container>
+      <Container
+        style={{
+          backgroundColor: "WhiteSmoke",
+          marginTop: "10px",
+        }}
+      >
         <Row>
           <Col>
             <SensorCard />
