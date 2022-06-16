@@ -1,0 +1,1 @@
+docker run  -p 3000:3000 --rm --name feedback.app -v "/mnt/c/Users/linke/Projekte/home_network/frontend/src:/app/src" react
