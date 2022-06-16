@@ -1,7 +1,6 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 
 const SensorCard = (props) => {
   return (
@@ -11,13 +10,13 @@ const SensorCard = (props) => {
           <Row>
             <Card.Img
               className="mx-auto mt-2"
-              src="thermometer.png"
+              src={props.img_name}
               style={{ height: "100px", width: "120px" }}
             />
           </Row>
           <Row>
             <Card.Body>
-              <Card.Title>{props.title}</Card.Title>
+              <Card.Title>{props.sensor_name}</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">
                 {props.value}
               </Card.Subtitle>
@@ -30,7 +29,8 @@ const SensorCard = (props) => {
 };
 
 SensorCard.defaultProps = {
-  title: "sensor name",
+  img_name: "thermometer.png",
+  sensor_name: "sensor name",
   value: "value",
 };
 

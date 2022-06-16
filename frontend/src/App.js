@@ -16,10 +16,10 @@ function App() {
       >
         <Row>
           <Col>
-            <SensorCard />
+            <SensorCard img_name="thermometer.png" sensor_name="Temperature" />
           </Col>
           <Col>
-            <SensorCard />
+            <SensorCard img_name="humidity.png" sensor_name="Humidity" />
           </Col>
         </Row>
       </Container>
