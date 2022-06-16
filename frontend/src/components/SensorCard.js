@@ -2,26 +2,27 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
-const SensorCard = () => {
+const SensorCard = (props) => {
   return (
     <div>
-      <Card style={{ width: "18rem" }}>
+      <Card style={{ width: "25rem" }}>
+        <Card.Img />
+
         <Card.Body>
-          <Card.Title>Card Title</Card.Title>
+          <Card.Title>{props.title}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
-            Card Subtitle
+            {props.value}
           </Card.Subtitle>
-          <Card.Text>
-            Sosadfsdfm sdf e qusdfick example text to build on the card title
-            and make up the bulk of the card's content.
-          </Card.Text>
-          <Card.Link href="#">Card Link</Card.Link>
-          <Card.Link href="#">Another Link</Card.Link>
         </Card.Body>
       </Card>
-      <Button>warum</Button>
+      <Button>Button</Button>
     </div>
   );
+};
+
+SensorCard.defaultProps = {
+  title: "sensor name",
+  value: "value",
 };
 
 export default SensorCard;

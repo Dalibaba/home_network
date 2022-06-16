@@ -1,5 +1,6 @@
 import Header from "./components/Header";
 import SensorCard from "./components/SensorCard";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
