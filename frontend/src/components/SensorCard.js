@@ -6,8 +6,10 @@ const SensorCard = (props) => {
   return (
     <div>
       <Card style={{ width: "25rem" }}>
-        <Card.Img />
-
+        <Card.Img
+          src="thermometer.png"
+          style={{ height: "100px", width: "100px" }}
+        />
         <Card.Body>
           <Card.Title>{props.title}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
@@ -15,7 +17,6 @@ const SensorCard = (props) => {
           </Card.Subtitle>
         </Card.Body>
       </Card>
-      <Button>Button</Button>
     </div>
   );
 };
