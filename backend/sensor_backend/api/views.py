@@ -1,7 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from rest_framework import generics
+from .models import Sensor
+from .serializer import SensorSerializer
 # Create your views here.
 
 
-def main(request):
-    return HttpResponse("Hello")
+class SensorView(generics.ListAPIView):
+    queryset = Sensor.objects.all()  # return all Sensors
+    serializer_class = SensorSerializer

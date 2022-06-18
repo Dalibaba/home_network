@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import main
+from .views import SensorView
 
 urlpatterns = [
-    path('', main)
+    path('', SensorView.as_view())
 ]
