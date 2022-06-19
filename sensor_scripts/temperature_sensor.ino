@@ -3,17 +3,18 @@
 #include <ArduinoJson.h>
 #include "DHT.h"
 
-#define DHTPIN 5      // PIN 5
+#define DHTPIN 13     // D 7 (look up in pinout reference png in docu)
 #define DHTTYPE DHT11 //  DHT11 Sensor
 
 DHT dht(DHTPIN, DHTTYPE); // Create Sensor as dht
 
 const char *SSID = "";
 const char *PSK = "";
-const char *MQTT_BROKER = "";
-const char *MQTT_PATH_Temp = "Sensor_Temperature";
-const char *MQTT_PATH_Hum = "Sensor_Humidity";
+const char *MQTT_BROKER = "192.168.0.120";
+const char *TEMP_TOPIC = "flat/bath/temperature";
+const char *HUMI_TOPIC = "flat/bath/humidity";
 const char *SENSOR_ID = "t_1";
+const char *ROOM = "bath";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -40,7 +41,6 @@ void setup_wifi()
         delay(500);
         Serial.print(".");
     }
-
     Serial.println("");
     Serial.println("WiFi connected");
     Serial.println("IP address: ");
@@ -75,18 +75,38 @@ void loop()
 
     float temperature = dht.readTemperature(); // get temperature data
 
-    // Put Data in Json Format for Publishing
-    StaticJsonDocument<200> temp;
-    temp["t_1"] = temperature;
+    DynamicJsonDocument doc_temp(1024);
+    doc_temp["device"] = "ESP32";
+    doc_temp["sensor_id"] = SENSOR_ID;
+    doc_temp["room"] = ROOM;
+    doc_temp["temperature"] = temperature;
+    char buffer_temp[256];
 
-    StaticJsonDocument<200> humi;
-    humi["t_1"] = humidity;
+    DynamicJsonDocument doc_humi(1024);
+    doc_humi["device"] = "ESP32";
+    doc_humi["sensor_id"] = SENSOR_ID;
+    doc_humi["room"] = ROOM;
+    doc_humi["temperature"] = temperature;
+    char buffer_humi[256];
 
-    char buffer1[256];
-    serializeJson(temp, buffer1);
-    char buffer2[256];
-    serializeJson(humi, buffer2);
-    // Publish
-    client.publish(MQTT_PATH_Temp, buffer1);
-    client.publish(MQTT_PATH_Hum, buffer2);
+    serializeJson(doc_temp, buffer_temp);
+    serializeJson(doc_humi, buffer_humi);
+
+    if (client.publish(TEMP_TOPIC, buffer_temp) == true)
+    {
+        Serial.println("\nSuccess sending message");
+    }
+    else
+    {
+        Serial.println("\nError sending message");
+    }
+
+    if (client.publish(HUMI_TOPIC, buffer_humi) == true)
+    {
+        Serial.println("\nSuccess sending message");
+    }
+    else
+    {
+        Serial.println("\nError sending message");
+    }
 }

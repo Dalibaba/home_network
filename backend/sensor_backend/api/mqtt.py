@@ -1,12 +1,15 @@
 import paho.mqtt.client as mqtt  # This is the Subscriber#hostname
+
 broker = "localhost"  # port
 port = 1883  # time to live
 timelive = 60
 
+subscription_topic = "flat/+/temperature"
+
 
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
-    client.subscribe("/data")
+    client.subscribe(subscription_topic)
 
 
 def on_message(client, userdata, msg):
