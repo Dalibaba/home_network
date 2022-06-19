@@ -14,6 +14,7 @@ const char *MQTT_BROKER = "192.168.0.120";
 const char *TEMP_TOPIC = "flat/bath/temperature";
 const char *HUMI_TOPIC = "flat/bath/humidity";
 const char *SENSOR_ID = "t_1";
+const char *SENSOR_NAME = "ESP8266";
 const char *ROOM = "bath";
 
 WiFiClient espClient;
@@ -76,14 +77,14 @@ void loop()
     float temperature = dht.readTemperature(); // get temperature data
 
     DynamicJsonDocument doc_temp(1024);
-    doc_temp["device"] = "ESP32";
+    doc_temp["device"] = SENSOR_NAME;
     doc_temp["sensor_id"] = SENSOR_ID;
     doc_temp["room"] = ROOM;
     doc_temp["temperature"] = temperature;
     char buffer_temp[256];
 
     DynamicJsonDocument doc_humi(1024);
-    doc_humi["device"] = "ESP32";
+    doc_humi["device"] = SENSOR_NAME;
     doc_humi["sensor_id"] = SENSOR_ID;
     doc_humi["room"] = ROOM;
     doc_humi["temperature"] = temperature;
