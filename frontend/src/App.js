@@ -1,5 +1,6 @@
 import Header from "./components/Header";
 import SensorCard from "./components/SensorCard";
+import Spinner from "./components/Spinner";
 import { Container, Row, Col } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -16,12 +17,13 @@ function App() {
         const response = await axios.get(SENSOR_ROUTE);
         setData(response.data);
         setError(null);
-        console.log(response.data[0].room);
       } catch (err) {
         setError(err.message);
         setData(null);
       } finally {
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 750);
       }
     };
     getData();
@@ -30,11 +32,22 @@ function App() {
   return (
     <div className="container">
       <Header />
-      {loading && <div>A moment please...</div>}
+      {loading && (
+        <Container
+          style={{
+            display: "flex",
+            alignItems: "center",
+            marginTop: "150px",
+            justifyContent: "center",
+          }}
+        >
+          <Spinner />
+        </Container>
+      )}
       {error && (
         <div>{`There is a problem fetching the post data - ${error}`}</div>
       )}
-      {data && (
+      {data && !loading && (
         <Container
           style={{
             backgroundColor: "WhiteSmoke",
@@ -43,7 +56,16 @@ function App() {
           }}
         >
           <Row>
-            <h1>{data[0].room}</h1>
+            <Col
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginTop: "25px",
+                justifyContent: "center",
+              }}
+            >
+              <h1>{data[0].room}</h1>
+            </Col>
           </Row>
 
           <Row>
