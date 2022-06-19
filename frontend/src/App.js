@@ -16,6 +16,7 @@ function App() {
         const response = await axios.get(SENSOR_ROUTE);
         setData(response.data);
         setError(null);
+        console.log(response.data[0].room);
       } catch (err) {
         setError(err.message);
         setData(null);
@@ -29,26 +30,35 @@ function App() {
   return (
     <div className="container">
       <Header />
-      <Container
-        style={{
-          backgroundColor: "WhiteSmoke",
-          marginTop: "10px",
-          width: "80%",
-        }}
-      >
-        {loading && <div>A moment please...</div>}
-        {error && (
-          <div>{`There is a problem fetching the post data - ${error}`}</div>
-        )}
-        <Row>
-          <Col>
-            <SensorCard img_name="thermometer.png" sensor_name="Temperature" />
-          </Col>
-          <Col>
-            <SensorCard img_name="humidity.png" sensor_name="Humidity" />
-          </Col>
-        </Row>
-      </Container>
+      {loading && <div>A moment please...</div>}
+      {error && (
+        <div>{`There is a problem fetching the post data - ${error}`}</div>
+      )}
+      {data && (
+        <Container
+          style={{
+            backgroundColor: "WhiteSmoke",
+            marginTop: "10px",
+            width: "80%",
+          }}
+        >
+          <Row>
+            <h1>{data[0].room}</h1>
+          </Row>
+
+          <Row>
+            <Col>
+              <SensorCard
+                img_name="thermometer.png"
+                sensor_name="Temperature"
+              />
+            </Col>
+            <Col>
+              <SensorCard img_name="humidity.png" sensor_name="Humidity" />
+            </Col>
+          </Row>
+        </Container>
+      )}
     </div>
   );
 }
