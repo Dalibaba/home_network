@@ -3,6 +3,9 @@ from enum import Enum
 from .models import Sensor, Temperature, Humidity, Room
 import datetime
 import json
+import logging
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
 
 
 class DatabaseHelper:
@@ -34,9 +37,10 @@ class DatabaseHelper:
     def add(self, reading, sensor, topic):
         obj = self.get_value_table(topic)
         obj.sensor = sensor
-        obj.time = reading["time"]
+        obj.date_time = reading["time"]
         obj.value = reading["value"]
         obj.save()
+        logger.debug("value saved")
 
     @staticmethod
     def get_value_table(topic):

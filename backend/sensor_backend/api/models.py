@@ -16,11 +16,11 @@ class Room(models.Model):
 
 class Temperature(models.Model):
     sensor = models.ForeignKey(Sensor, on_delete=models.CASCADE)
-    time = models.DateField()
+    date_time = models.DateTimeField()
     value = models.FloatField()
 
 
 class Humidity(models.Model):
     sensor = models.ForeignKey(Sensor, on_delete=models.CASCADE)
-    time = models.DateField()
+    date_time = models.DateTimeField()
     value = models.FloatField()
