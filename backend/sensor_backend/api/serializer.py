@@ -1,19 +1,13 @@
 from dataclasses import field
 from rest_framework import serializers
 
-from .models import Sensor, Room, Temperature, Humidity
+from .models import Sensor, Temperature, Humidity
 
 
 class SensorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sensor
-        fields = ('id', 'device', 'sensor_id')
-
-
-class RoomSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Room
-        fields = ('id', 'name', 'sensor')
+        fields = ('id', 'device', 'sensor_id', 'room')
 
 
 class TemperatureSerializer(serializers.ModelSerializer):

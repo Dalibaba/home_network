@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
-from .models import Sensor, Room, Temperature, Humidity
-from .serializer import SensorSerializer, RoomSerializer, TemperatureSerializer, HumiditySerializer
+from .models import Sensor, Temperature, Humidity
+from .serializer import SensorSerializer, TemperatureSerializer, HumiditySerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 # Create your views here.
@@ -10,11 +10,6 @@ from rest_framework.views import APIView
 class SensorView(generics.ListAPIView):
     queryset = Sensor.objects.all()  # return all Sensors
     serializer_class = SensorSerializer
-
-
-class RoomView(generics.ListAPIView):
-    queryset = Room.objects.all()  # return all Sensors
-    serializer_class = RoomSerializer
 
 
 class Sensorview(generics.ListAPIView):
@@ -32,7 +27,7 @@ class Sensorview(generics.ListAPIView):
                 queryset = queryset.filter(sensor=sensor_id)
                 if latest is not None:
                     queryset = queryset.filter(
-                        sensor=sensor_id).order_by("-date_time")[:1]
+                        sensor=sensor_id).order_by("-date_time")[:1]  # descending
             return queryset
 
 

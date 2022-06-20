@@ -13,7 +13,8 @@ const char *PSK = "";
 const char *MQTT_BROKER = "192.168.0.120";
 const char *TEMP_TOPIC = "flat/bath/temperature";
 const char *HUMI_TOPIC = "flat/bath/humidity";
-const char *SENSOR_ID = "t_1";
+const char *SENSOR_ID_T = "t_1";
+const char *SENSOR_ID_H = "h_1";
 const char *SENSOR_NAME = "ESP8266";
 const char *ROOM = "bath";
 
@@ -77,14 +78,14 @@ void loop()
 
     DynamicJsonDocument doc_temp(1024);
     doc_temp["device"] = SENSOR_NAME;
-    doc_temp["sensor_id"] = SENSOR_ID;
+    doc_temp["sensor_id"] = SENSOR_ID_T;
     doc_temp["room"] = ROOM;
     doc_temp["temperature"] = temperature;
     char buffer_temp[256];
 
     DynamicJsonDocument doc_humi(1024);
     doc_humi["device"] = SENSOR_NAME;
-    doc_humi["sensor_id"] = SENSOR_ID;
+    doc_humi["sensor_id"] = SENSOR_ID_H;
     doc_humi["room"] = ROOM;
     doc_humi["humidity"] = humidity;
     char buffer_humi[256];
