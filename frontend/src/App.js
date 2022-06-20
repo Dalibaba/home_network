@@ -18,7 +18,6 @@ function App() {
       const response = await axios.get(route, {
         params: { id: sensor_id, latest: "true" },
       });
-      console.log(response);
       return response;
     };
     const getSensors = async () => {
@@ -38,26 +37,27 @@ function App() {
 
           for (let index = 0; index < response.data.length; index++) {
             if (response.data[index].room == room_set) {
+              let value = "no value";
               let response_value = await getSensorValue(
                 TEMPERATURE_ROUTE,
                 response.data[index].id
               );
-              console.log(response_value.data[0].value);
+              if (response_value.data.length != 0) {
+                value = response_value.data[0].value;
+              }
               sensorList.push(
                 new Sensor(
                   response.data[index].device,
                   response.data[index].sensor_id,
                   response.data[index].type,
-                  response_value.data[0].value
+                  value
                 )
               );
-              console.log(sensorList);
             }
           }
           let new_room = new Room(room_set, sensorList);
           roomListTemp.push(new_room);
         }
-        console.log(roomListTemp);
         setRoomList(roomListTemp);
         setError(null);
       } catch (err) {
