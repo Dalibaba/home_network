@@ -1,5 +1,6 @@
 from .models import Sensor, SensorValue, Room
 import datetime
+import json
 
 
 class DatabaseHelper:
@@ -14,7 +15,9 @@ class DatabaseHelper:
 
     @staticmethod
     def format_reading(reading):
-        return 0
+        reading = json.loads(reading)
+
+        return reading
 
     @staticmethod
     def add():
