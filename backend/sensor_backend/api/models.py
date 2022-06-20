@@ -10,11 +10,17 @@ class Sensor(models.Model):
 
 
 class Room(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, unique=True)
     sensor = models.ForeignKey(Sensor, on_delete=models.CASCADE)
 
 
-class SensorValue(models.Model):
+class Temperature(models.Model):
     sensor = models.ForeignKey(Sensor, on_delete=models.CASCADE)
     time = models.DateField()
-    temperature = models.FloatField()
+    value = models.FloatField()
+
+
+class Humidity(models.Model):
+    sensor = models.ForeignKey(Sensor, on_delete=models.CASCADE)
+    time = models.DateField()
+    value = models.FloatField()

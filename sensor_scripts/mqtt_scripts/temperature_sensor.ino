@@ -87,7 +87,7 @@ void loop()
     doc_humi["device"] = SENSOR_NAME;
     doc_humi["sensor_id"] = SENSOR_ID;
     doc_humi["room"] = ROOM;
-    doc_humi["temperature"] = temperature;
+    doc_humi["humidity"] = humidity;
     char buffer_humi[256];
 
     serializeJson(doc_temp, buffer_temp);

@@ -1,4 +1,5 @@
 # import the logging library
+import json
 import time
 from .database_helper import DatabaseHelper
 import paho.mqtt.client as mqtt
@@ -11,25 +12,25 @@ broker = "localhost"  # port
 port = 1883  # time to live
 timelive = 60
 
-subscription_topic = "flat/+/temperature"
+temperature_topic = "flat/+/temperature"
+humidity_topic = "flat/+/humidity"
 database_helper = DatabaseHelper()
 
 
 def on_connect(client, userdata, flags, rc):
 
     if rc == 0:
-        logger.debug("connected OK Returned code=", rc)
-        client.subscribe(subscription_topic)
+        logger.debug("connected OK Returned code=" + str(rc))
+        client.subscribe(temperature_topic)
+        client.subscribe(humidity_topic)
     else:
-        logger.debug("Bad connection Returned code=", rc)
+        logger.debug("Bad connection Returned code=" + str(rc))
         time.sleep(3)
         connect(client)
 
 
 def on_message(client, userdata, msg):
-    # cprint(msg.payload.decode())
-    json_data = msg.payload.decode()
-    database_helper.add_reading(json_data)
+    database_helper.add_reading(msg.payload.decode(), msg.topic)
 
 
 def connect(client):
