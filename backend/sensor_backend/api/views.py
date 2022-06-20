@@ -17,13 +17,15 @@ class RoomView(generics.ListAPIView):
     serializer_class = RoomSerializer
 
 
-class TemperatureView(generics.ListAPIView):
-    queryset = Temperature.objects.all()  # return all Sensors
-    serializer_class = TemperatureSerializer
+class Sensorview(generics.ListAPIView):
+
+    def __init__(self):
+        self.model = None
+        self.serializer_class = None
 
     def get_queryset(self):
         if self.request.method == 'GET':
-            queryset = Temperature.objects.all()
+            queryset = self.model.objects.all()
             sensor_id = self.request.GET.get('id', None)
             latest = self.request.GET.get('latest', None)
             if sensor_id is not None:
@@ -34,6 +36,16 @@ class TemperatureView(generics.ListAPIView):
             return queryset
 
 
-class HumidityView(generics.ListAPIView):
-    queryset = Humidity.objects.all()  # return all Sensors
-    serializer_class = HumiditySerializer
+class TemperatureView(Sensorview):
+
+    def __init__(self):
+        super().__init__()
+        self.model = Temperature
+        self.serializer_class = TemperatureSerializer
+
+
+class HumidityView(Sensorview):
+    def __init__(self):
+        super().__init__()
+        self.model = Humidity
+        self.serializer_class = HumiditySerializer
