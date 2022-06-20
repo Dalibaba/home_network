@@ -4,7 +4,7 @@ import Spinner from "./components/Spinner";
 import { Container, Row, Col } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { SENSOR_ROUTE, TEMPERATURE_ROUTE, HUMIDITY_ROUTE } from "./constants";
+import { SENSOR_ROUTE, API_URL } from "./constants";
 import { Sensor } from "./models/Sensor";
 import { Room } from "./models/Room";
 
@@ -15,7 +15,7 @@ function App() {
 
   useEffect(() => {
     const getSensorValue = async (route, sensor_id) => {
-      const response = await axios.get(route, {
+      const response = await axios.get(API_URL + route, {
         params: { id: sensor_id, latest: "true" },
       });
       return response;
@@ -39,7 +39,7 @@ function App() {
             if (response.data[index].room == room_set) {
               let value = "no value";
               let response_value = await getSensorValue(
-                TEMPERATURE_ROUTE,
+                response.data[index].type,
                 response.data[index].id
               );
               if (response_value.data.length != 0) {
@@ -119,7 +119,8 @@ function App() {
                   <Col key={index}>
                     <SensorCard
                       img_name="thermometer.png"
-                      sensor_name={sensor.type}
+                      sensorName={sensor.type}
+                      sensorValue={sensor.value}
                     />
                   </Col>
                 ))}

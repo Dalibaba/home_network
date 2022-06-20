@@ -10,15 +10,15 @@ const SensorCard = (props) => {
           <Row>
             <Card.Img
               className="mx-auto mt-2"
-              src={props.img_name}
+              src={props.imgName}
               style={{ height: "100px", width: "120px" }}
             />
           </Row>
           <Row>
             <Card.Body>
-              <Card.Title>{props.sensor_name}</Card.Title>
+              <Card.Title>{props.sensorName}</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">
-                {props.value}
+                {props.sensorValue}
               </Card.Subtitle>
             </Card.Body>
           </Row>
@@ -29,9 +29,9 @@ const SensorCard = (props) => {
 };
 
 SensorCard.defaultProps = {
-  img_name: "thermometer.png",
-  sensor_name: "sensor name",
-  value: "value",
+  imgName: "thermometer.png",
+  sensorName: "sensor name",
+  sensorValue: "no value present",
 };
 
 export default SensorCard;
