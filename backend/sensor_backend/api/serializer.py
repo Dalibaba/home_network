@@ -7,7 +7,7 @@ from .models import Sensor, Temperature, Humidity
 class SensorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sensor
-        fields = ('id', 'device', 'sensor_id', 'room')
+        fields = ('id', 'device', 'sensor_id', 'room', 'type')
 
 
 class TemperatureSerializer(serializers.ModelSerializer):
