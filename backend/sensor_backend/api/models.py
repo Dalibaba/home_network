@@ -6,7 +6,7 @@ from django.db import models
 
 class Sensor(models.Model):
     device = models.CharField(max_length=30)
-    sensor_id = models.CharField(max_length=15)
+    sensor_id = models.CharField(max_length=15, unique=True)
 
 
 class Room(models.Model):
@@ -18,4 +18,3 @@ class SensorValue(models.Model):
     sensor = models.ForeignKey(Sensor, on_delete=models.CASCADE)
     time = models.DateField()
     temperature = models.FloatField()
-    humidity = models.FloatField()

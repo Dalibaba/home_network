@@ -27,7 +27,7 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, msg):
-    print(msg.payload.decode())
+    # cprint(msg.payload.decode())
     json_data = msg.payload.decode()
     database_helper.add_reading(json_data)
 
