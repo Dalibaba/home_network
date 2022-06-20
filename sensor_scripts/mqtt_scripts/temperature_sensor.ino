@@ -65,7 +65,6 @@ void reconnect()
 void loop()
 {
 
-    delay(2000);
     if (!client.connected())
     {
         reconnect(); // try reconnecting with WiFi
@@ -110,4 +109,5 @@ void loop()
     {
         Serial.println("\nError sending message");
     }
+    delay(60000);
 }
