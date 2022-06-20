@@ -19,9 +19,9 @@ class RoomView(generics.ListAPIView):
 
 class Sensorview(generics.ListAPIView):
 
-    def __init__(self):
-        self.model = None
-        self.serializer_class = None
+    def __init__(self, model, serializer):
+        self.model = model
+        self.serializer_class = serializer
 
     def get_queryset(self):
         if self.request.method == 'GET':
@@ -39,13 +39,9 @@ class Sensorview(generics.ListAPIView):
 class TemperatureView(Sensorview):
 
     def __init__(self):
-        super().__init__()
-        self.model = Temperature
-        self.serializer_class = TemperatureSerializer
+        super().__init__(Temperature, TemperatureSerializer)
 
 
 class HumidityView(Sensorview):
     def __init__(self):
-        super().__init__()
-        self.model = Humidity
-        self.serializer_class = HumiditySerializer
+        super().__init__(Humidity, HumiditySerializer)
