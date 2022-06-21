@@ -1,7 +1,7 @@
 import Header from "./components/Header";
 import SensorCard from "./components/SensorCard";
 import Spinner from "./components/Spinner";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { SENSOR_ROUTE, API_URL } from "./constants";
@@ -70,8 +70,11 @@ function App() {
       }
     };
     getSensors();
-  }, []);
+  }, [loading]);
 
+  const handleClick = (e) => {
+    setLoading(true);
+  };
   return (
     <div className="container">
       <Header />
@@ -91,14 +94,27 @@ function App() {
         <div>{`There is a problem fetching the post data - ${error}`}</div>
       )}
       {roomList && !loading && (
-        <div>
+        <Container
+          style={{
+            backgroundColor: "Gainsboro",
+            marginTop: "10px",
+            width: "90%",
+          }}
+        >
+          <Row>
+            <Col>
+              <Button variant="danger" onClick={handleClick}>
+                Refresh
+              </Button>
+            </Col>
+          </Row>
           {roomList.map((room, index) => (
             <Container
               key={index}
               style={{
-                backgroundColor: "WhiteSmoke",
-                marginTop: "10px",
+                marginTop: "20px",
                 width: "80%",
+                backgroundColor: "whitesmoke",
               }}
             >
               <Row>
@@ -127,7 +143,7 @@ function App() {
               </Row>
             </Container>
           ))}
-        </div>
+        </Container>
       )}
     </div>
   );
