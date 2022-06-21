@@ -3,6 +3,14 @@ import Card from "react-bootstrap/Card";
 import { Container, Row } from "react-bootstrap";
 
 const SensorCard = (props) => {
+  let imgName = props.sensorType + ".png";
+  let unit = "";
+  if (props.sensorType == "temperature") {
+    unit = " °";
+  } else if (props.sensorType == "humidity") {
+    unit = " %";
+  }
+
   return (
     <div>
       <Card style={{ margin: "10px" }}>
@@ -10,15 +18,17 @@ const SensorCard = (props) => {
           <Row>
             <Card.Img
               className="mx-auto mt-2"
-              src={props.imgName}
-              style={{ height: "100px", width: "120px" }}
+              src={imgName}
+              style={{ height: "80px", width: "100px" }}
             />
           </Row>
           <Row>
             <Card.Body>
-              <Card.Title>{props.sensorName}</Card.Title>
+              <Card.Title>
+                {props.sensorType} ({props.sensorId})
+              </Card.Title>
               <Card.Subtitle className="mb-2 text-muted">
-                {props.sensorValue}
+                {props.sensorValue} {unit}
               </Card.Subtitle>
             </Card.Body>
           </Row>
@@ -29,9 +39,9 @@ const SensorCard = (props) => {
 };
 
 SensorCard.defaultProps = {
-  imgName: "thermometer.png",
-  sensorName: "sensor name",
+  sensorType: "type of sensor",
   sensorValue: "no value present",
+  sensorId: "sensor Id",
 };
 
 export default SensorCard;

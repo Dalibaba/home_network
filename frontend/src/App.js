@@ -135,8 +135,9 @@ function App() {
                   <Col key={index}>
                     <SensorCard
                       img_name="thermometer.png"
-                      sensorName={sensor.type}
+                      sensorType={sensor.type}
                       sensorValue={sensor.value}
+                      sensorId={sensor.sensor_id}
                     />
                   </Col>
                 ))}
