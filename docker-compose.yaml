@@ -8,16 +8,19 @@ services:
       - ./frontend/src:/app/src
     stdin_open: true
     tty: true
-    
+    depends_on:
+      - backend
+
   mosquitto:
-        image: toke/mosquitto
-        network_mode: bridge
-        container_name: mosquitto
-        expose:
-          - 1883
-        ports:
-          - 1883:1883
-        restart: unless-stopped
+       image: toke/mosquitto
+       network_mode: bridge
+       container_name: mosquitto
+       expose:
+         - 1883
+       ports:
+         - 1883:1883
+       restart: unless-stopped
+
   backend:
         build: ./backend
         ports:
@@ -25,5 +28,4 @@ services:
         volumes:
         - ./backend/sensor_backend:/app/sensor_backend
         depends_on:
-          - mosquitto
-
+         - mosquitto
