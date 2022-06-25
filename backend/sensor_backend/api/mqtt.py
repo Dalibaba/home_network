@@ -8,7 +8,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-broker = "localhost"  # port
+broker = "mosquitto"  # port
 port = 1883  # time to live
 timelive = 60
 
@@ -36,12 +36,17 @@ def on_message(client, userdata, msg):
 def connect(client):
     try:
         rc = client.connect(broker, port, timelive)
+        print("rc:", rc)
     except ConnectionRefusedError:
         logger.error(
-            "ConnectionRefusedError: Failed to connect to mqtt broker. Is the Broker running?")
+            "ConnectionRefusedError: Failed to connect to mqtt broker %s %s Is the Broker running?", broker, port)
         time.sleep(3)
+        logger.debug(ConnectionRefusedError)
         logger.debug("Try to connect again . . . ")
         connect(client)
+    except Exception:
+        logger.error(
+            "Cannot connect to mqtt broker  %s %s:", broker, port)
 
 
 client = mqtt.Client()
