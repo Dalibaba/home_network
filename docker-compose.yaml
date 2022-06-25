@@ -12,9 +12,10 @@ services:
       - backend
 
   mosquitto:
-       image: toke/mosquitto
-       network_mode: bridge
+       image: eclipse-mosquitto
        container_name: mosquitto
+       volumes:
+        - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
        expose:
          - 1883
        ports:
@@ -29,3 +30,12 @@ services:
         - ./backend/sensor_backend:/app/sensor_backend
         depends_on:
          - mosquitto
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+
+volumes:
+  postgres_data:
