@@ -30,8 +30,6 @@ services:
         - ./backend/sensor_backend:/app/sensor_backend
         depends_on:
          - mosquitto
-        env_file:
-          - ./env/backend.env
 
   db:
     image: postgres:13
