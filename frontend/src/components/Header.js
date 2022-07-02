@@ -10,7 +10,7 @@ const Header = () => {
         justifyContent: "center",
       }}
     >
-      <h1>Home Dashboard</h1>
+      <h1>Home Dashboard!</h1>
     </header>
   );
 };

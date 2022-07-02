@@ -8,7 +8,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-broker = "mosquitto"  # port
+broker = "mosquitto"  # port s
 port = 1883  # time to live
 timelive = 60
 
