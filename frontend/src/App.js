@@ -1,6 +1,7 @@
 import NavBar from './components/NavBar';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from "./Home";
+import  Sensor  from './Sensor';
 
 
 function App() {
@@ -11,7 +12,8 @@ function App() {
       <NavBar/>
       <div className="content">
       <Routes>
-        <Route path="/" element={<Home />}/>
+        <Route exact path="/" element={<Home />}/>
+        <Route path="/sensor" element={<Sensor/>}/>
      </Routes>
     </div>    
     </div>

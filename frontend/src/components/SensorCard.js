@@ -1,7 +1,7 @@
 import React, {useCallback} from "react";
 import Card from "react-bootstrap/Card";
 import { Container, Row } from "react-bootstrap";
-import {useNavigate} from 'react-router-dom';
+import {createSearchParams,useNavigate} from 'react-router-dom';
 
 const SensorCard = (props) => {
   let imgName = props.sensorType + ".png";
@@ -13,7 +13,14 @@ const SensorCard = (props) => {
   }
 
     const navigate = useNavigate();
-    const handleOnClick = useCallback(() => navigate('/sensor', {replace: true}), [navigate]);
+    
+
+    const handleOnClick = useCallback(() =>     navigate({
+      pathname: "sensor",
+      search: createSearchParams({
+          id: props.sensorId
+      }).toString()
+    }));//navigate('/sensor', {replace: true}), [navigate]);
 
   return (
     <div>
