@@ -1,7 +1,7 @@
 import NavBar from './components/NavBar';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from "./Home";
-import  Sensor  from './Sensor';
+import Home from "./pages/Home";
+import  Sensor  from './pages/Sensor';
 
 
 function App() {

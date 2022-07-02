@@ -1,13 +1,13 @@
 import React from 'react'
-import Header from "./components/Header";
-import SensorCard from "./components/SensorCard";
-import Spinner from "./components/Spinner";
+import Header from "../components/Header";
+import SensorCard from "../components/SensorCard";
+import Spinner from "../components/Spinner";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { SENSOR_ROUTE, API_URL } from "./constants";
-import { Sensor } from "./models/Sensor";
-import { Room } from "./models/Room";
+import { SENSOR_ROUTE, API_URL } from "../constants";
+import { Sensor } from "../models/Sensor";
+import { Room } from "../models/Room";
 
 const Home = () => {
     const [roomList, setRoomList] = useState(null);
@@ -67,7 +67,7 @@ const Home = () => {
         } finally {
           setTimeout(() => {
             setLoading(false);
-          }, 750);
+          }, 300);
         }
       };
       getSensors();

@@ -7,15 +7,13 @@ import "../SensorCard.css";
 const SensorCard = (props) => {
   let imgName = props.sensorType + ".png";
   let unit = "";
-  if (props.sensorType == "temperature") {
+  if (props.sensorType === "temperature") {
     unit = " °";
-  } else if (props.sensorType == "humidity") {
+  } else if (props.sensorType === "humidity") {
     unit = " %";
   }
 
     const navigate = useNavigate();
-    
-
     const handleOnClick = useCallback(() =>     navigate({
       pathname: "sensor",
       search: createSearchParams({
