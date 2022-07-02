@@ -2,6 +2,7 @@ import React, {useCallback} from "react";
 import Card from "react-bootstrap/Card";
 import { Container, Row } from "react-bootstrap";
 import {createSearchParams,useNavigate} from 'react-router-dom';
+import "../SensorCard.css";
 
 const SensorCard = (props) => {
   let imgName = props.sensorType + ".png";
@@ -22,9 +23,11 @@ const SensorCard = (props) => {
       }).toString()
     }));//navigate('/sensor', {replace: true}), [navigate]);
 
+
   return (
     <div>
-      <Card style={{ margin: "10px" }} onClick={handleOnClick}>
+      <Card className = "card" style={{ margin: "10px" }} onClick={handleOnClick} 
+      >
         <Container style={{ textAlign: "center" }}>
           <Row>
             <Card.Img
@@ -47,6 +50,8 @@ const SensorCard = (props) => {
       </Card>
     </div>
   );
+
+  
 };
 
 SensorCard.defaultProps = {
@@ -54,5 +59,7 @@ SensorCard.defaultProps = {
   sensorValue: "no value present",
   sensorId: "sensor Id",
 };
+
+
 
 export default SensorCard;
