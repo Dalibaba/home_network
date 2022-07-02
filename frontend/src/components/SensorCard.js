@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useCallback} from "react";
 import Card from "react-bootstrap/Card";
 import { Container, Row } from "react-bootstrap";
+import {useNavigate} from 'react-router-dom';
 
 const SensorCard = (props) => {
   let imgName = props.sensorType + ".png";
@@ -11,9 +12,12 @@ const SensorCard = (props) => {
     unit = " %";
   }
 
+    const navigate = useNavigate();
+    const handleOnClick = useCallback(() => navigate('/sensor', {replace: true}), [navigate]);
+
   return (
     <div>
-      <Card style={{ margin: "10px" }}>
+      <Card style={{ margin: "10px" }} onClick={handleOnClick}>
         <Container style={{ textAlign: "center" }}>
           <Row>
             <Card.Img
