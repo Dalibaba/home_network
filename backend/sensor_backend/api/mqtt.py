@@ -22,7 +22,7 @@ def on_connect(client, userdata, flags, rc):
     if rc == 0:
         logger.debug(
 
-            f"connection to mosquitto broker on port {port} successful. Subscribe to sensor clients ... \n ")
+            f"connection to mosquitto broker on port {port} successfull. Subscribe to sensor clients ... \n ")
         client.subscribe(temperature_topic)
         client.subscribe(humidity_topic)
     else:

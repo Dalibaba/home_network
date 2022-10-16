@@ -49,7 +49,6 @@ class SensorView(DataView):
     def get_queryset(self):
         try:
             queryset = self.model.objects.all()  # return all Sensors
-            serializer_class = SensorSerializer
             return queryset
         except Exception as e:
             logger.error("query was unsuccessful")
