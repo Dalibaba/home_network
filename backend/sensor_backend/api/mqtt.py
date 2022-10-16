@@ -20,11 +20,14 @@ database_helper = DatabaseHelper()
 def on_connect(client, userdata, flags, rc):
 
     if rc == 0:
-        logger.debug("connected OK Returned code=" + str(rc))
+        logger.debug(
+
+            f"connection to mosquitto broker on port {port} successful. Subscribe to sensor clients ... \n ")
         client.subscribe(temperature_topic)
         client.subscribe(humidity_topic)
     else:
-        logger.debug("Bad connection Returned code=" + str(rc))
+        logger.debug(
+            f"connection to mosquitto broker on port {port} failed. Try again ... \n Returned code= {str(rc)}")
         time.sleep(3)
         connect(client)
 
@@ -35,8 +38,7 @@ def on_message(client, userdata, msg):
 
 def connect(client):
     try:
-        rc = client.connect(broker, port, timelive)
-        print("rc:", rc)
+        client.connect(broker, port, timelive)
     except ConnectionRefusedError:
         logger.error(
             "ConnectionRefusedError: Failed to connect to mqtt broker %s %s Is the Broker running?", broker, port)
